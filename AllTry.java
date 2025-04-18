@@ -6,7 +6,9 @@ import java.util.HashMap;
 
 public class AllTry {
     public static void main(String[] args) {
-
+        char a='5';
+        int tr=a-'1';
+        System.out.println(tr);
     }
 }
 
