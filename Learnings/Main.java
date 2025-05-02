@@ -22,7 +22,7 @@ public class Main {
 
     public static void decimalToOther(){
         String binar="1010";
-        int val=Integer.parseInt(binar,2);//indha 2 base value 2-binary,10-binary,16-hexadec
+        int val=Integer.parseInt(binar,2);//indha 2 base value 2-binary,10-decimal,16-hexadec
         System.out.println(val);                //Above func convert binary to integer;
         int a=10;
         String b=Integer.toBinaryString(a);

@@ -2,7 +2,21 @@ package Linked_List.Custom;
 
 public class Main {
     public static void main(String[] args) {
-         /*LinkdList mine=new LinkdList();
+
+
+
+//USING RECURSION
+        /*LinkdL list=new LinkdL();
+        list.insertFirst(5);
+        list.insertFirst(4);
+        list.insertFirst(3);
+        list.insertFirst(1);
+        list.recursiveInsert(2,1);
+        list.display();*/
+
+
+//USING SINGLY LINKED LIST
+         /*LinkdL mine=new LinkdL();
          mine.insertFirst(3);
          mine.insertFirst(4);
          mine.insertFirst(9);
@@ -11,7 +25,7 @@ public class Main {
          mine.insertFirst(8);
          mine.insertFirst(6);
          mine.insertLast(13);
-         mine.insertLast(21,3);
+         mine.insertLast(21);
          mine.display();
         System.out.println(mine.deleteFirst());;
          mine.display();
@@ -20,6 +34,7 @@ public class Main {
         System.out.println(mine.delete(4));
         mine.display();*/
 
+//USING DOUBLY LINKED LIST
         /*DoublyLL dll=new DoublyLL();
         dll.insertFist(5);
         dll.insertFist(4);
@@ -34,7 +49,8 @@ public class Main {
         dll.insertLast(5,6);
         dll.display();*/
 
-        CircularLL cll=new CircularLL();
+//USING CIRCULAR LINKED LIST
+     /*   CircularLL cll=new CircularLL();
         cll.insertLast(1);
         cll.insertLast(2);
         cll.insertLast(3);
@@ -43,6 +59,6 @@ public class Main {
         cll.insertLast(6);
         cll.insertLast(7);
         cll.insert(4,5);
-        cll.display();
+        cll.display();*/
     }
 }

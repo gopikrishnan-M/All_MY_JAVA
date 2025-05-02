@@ -1,14 +1,33 @@
 package Linked_List.Custom;
 
+//import Linked_List.probtry.ListNode;
+
 public class LinkdL {
-    private Node head;
-    private Node tail;
-    private int size;
+    public Node head;
+    public Node tail;
+    public int size;
 
     public LinkdL(){
         this.size=0;
         this.head = null;
         this.tail = null;
+    }
+
+    //recursive insertion of nodes in linked list
+    public void recursiveInsert(int val,int index){
+        head=helper(val,index,head);
+    }
+
+    public Node helper(int val,int index,Node node){
+        if (index == 0) {
+            Node temp=new Node(val,node);
+            size++;
+            return temp;
+        }
+
+        node.next=helper(val,index-1,node.next);
+        return node;
+
     }
 
     public void insertFirst(int val){
@@ -44,6 +63,7 @@ public class LinkdL {
         size++;
 
     }
+
 
     public void insertLast(int val){
         //if tail is not provided then we must traverse till last i.e temp equals to null then add the last node's
@@ -126,15 +146,15 @@ public class LinkdL {
 
 
 
-    private class Node{
-        private int val;
-        private Node next;
+    public class Node{
+        public int val;
+        public Node next;
 
         public Node(int val) {
             this.val = val;
         }
 
-        public Node(Node next, int val) {
+        public Node(int val, Node next) {
             this.next = next;
             this.val = val;
         }
