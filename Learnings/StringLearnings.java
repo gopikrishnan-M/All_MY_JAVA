@@ -1,7 +1,25 @@
 package Learnings;
 
 public class StringLearnings {
-    public static void main(String[] args) {/*
+    public static void main(String[] args) {
+        char c='1';
+        System.out.println((char)((c-'0') + 96));
+
+
+       /* *//**//*String s="hellk";
+        boolean ans=s.contains('h');
+//        char c='o';
+        StringBuilder sb=new StringBuilder(s);
+
+        sb.replace(0,1,"2");
+        System.out.println(sb);*/
+//        System.out.println(s.contains("k"));
+//        s=s.replace("he","lllllllll");
+//        s=s.replace('l',c);
+//        System.out.println(s);
+    }
+}
+/*
 
         // ===== CORE STRING OPERATIONS =====
 // 1. REPLACEMENT
@@ -74,5 +92,47 @@ public class StringLearnings {
 
 // 4. Regex cheat modes:
         Pattern.compile("regex", Pattern.CASE_INSENSITIVE); // Case-insensitive regex
-    */}
-}
+    */
+/*
+* // ===== STRINGBUILDER CHEAT SHEET =====
+
+// 1. CREATION
+StringBuilder sb = new StringBuilder();      // Empty (16-char capacity)
+StringBuilder sb = new StringBuilder(100);   // Pre-sized
+StringBuilder sb = new StringBuilder("Hi");  // From string
+
+// 2. MODIFICATION
+sb.append("!");             // Add to end → "Hi!"
+sb.insert(2, " Java");      // Insert at index → "Hi Java!"
+sb.delete(3, 7);            // Remove 3-6 → "Hi!"
+sb.deleteCharAt(2);         // Remove char → "H!"
+sb.replace(0, 1, "h");      // Replace range → "h!"
+sb.reverse();               // Reverse → "!h"
+sb.setCharAt(1, 'i');       // Set char → "!i"
+sb.setLength(0);            // Clear (keeps capacity)
+
+// 3. INSPECTION
+char c = sb.charAt(0);      // Get char → '!'
+int len = sb.length();      // Get length → 2
+int idx = sb.indexOf("i");  // Find position → 1
+String s = sb.toString();   // Convert to String → "!i"
+
+// 4. CAPACITY (OPTIMIZATION)
+int cap = sb.capacity();    // Current capacity (e.g., 16)
+sb.ensureCapacity(100);     // Expand capacity
+sb.trimToSize();            // Reduce to fit content
+
+// ===== PRO TIPS =====
+// 1. Chain operations:
+sb.append("A").append("B").reverse();
+
+// 2. Pre-size for large builds:
+StringBuilder big = new StringBuilder(10_000);
+
+// 3. NEVER do this in loops:
+//    String s = ""; s += "x"; // SLOW!
+//    Use StringBuilder instead.
+
+// 4. Thread-safe alternative: StringBuffer
+//    (Same API but slower due to synchronization)
+* */

@@ -3,6 +3,7 @@ package Test3;
 public class PermutationOfString {
     public static void main(String[] args) {
         permuter("","abc");
+
     }
 
     private static void permuter(String p, String up) {
@@ -10,6 +11,7 @@ public class PermutationOfString {
             System.out.println(p);
             return;
         }
+
         char a=up.charAt(0);
         for (int i = 0; i <=p.length(); i++) {
             String f=p.substring(0,i);

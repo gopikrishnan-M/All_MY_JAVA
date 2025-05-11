@@ -18,7 +18,6 @@ public class LongestPalindrome {
 
     private static boolean isPalindrome(String s) {
         StringBuilder sb=new StringBuilder(s);
-        sb=sb.reverse();
-        return s.equals(sb.toString());
+        return s.equals(sb.reverse().toString());
     }
 }
