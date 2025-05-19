@@ -2,8 +2,12 @@ package Learnings;
 
 public class StringLearnings {
     public static void main(String[] args) {
-        char c='1';
-        System.out.println((char)((c-'0') + 96));
+        String word="you";
+        String tryd=word.repeat(2);
+        System.out.println(tryd);
+
+//        char c='1';
+//        System.out.println((char)((c-'0') + 96));
 
 
        /* *//**//*String s="hellk";
@@ -26,6 +30,7 @@ public class StringLearnings {
         str.replace("old", "new");       // Replace all substrings
         str.replace('a', 'b');           // Replace all chars
         str = str.replaceFirst("old", "new"); // Replace first occurrence only
+        str= str.repeat(3) //the string will repeat thrice and stored
 
 // 2. CHECKING CONTENT
         str.contains("sub");            // Contains substring (case-sensitive)
