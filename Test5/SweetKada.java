@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 public class SweetKada {
     public static void main(String[] args) {
-        int total=3;
+        int total=2;
         int[] p1={1,2,3,4,5,6};
         int[] p3={3,3,3,4,4,4,5,5,5};
         ArrayList<int[]> players=new  ArrayList<>();
