@@ -1,10 +1,19 @@
 package Learnings;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringLearnings {
     public static void main(String[] args) {
-        String word="you";
-        String tryd=word.repeat(2);
-        System.out.println(tryd);
+        char c=0+'a';
+        System.out.println(c);
+
+
+//        String word="you";
+//        StringBuilder ans=new StringBuilder(word.substring(1,3)).reverse();
+//        String tryd=word.repeat(2);
+//        System.out.println(tryd);
+
 
 //        char c='1';
 //        System.out.println((char)((c-'0') + 96));

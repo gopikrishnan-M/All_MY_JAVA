@@ -2,7 +2,7 @@ package Test5;
 
 public class TcsOnSpot {
     public static void main(String[] args) {
-        int m=7;
+        int m=10;
         int[] pArr=new int[m];
         int i=0;
         int temp=2;
@@ -14,9 +14,8 @@ public class TcsOnSpot {
         }
         int val=pArr[pArr.length-1];
         int digit=(int)Math.log10(val)+1;
-        int sum=0;
         while (digit>1){
-
+            int sum=0;
             while (val>0){
                 int last=val%10;
                 sum+=last;
@@ -27,7 +26,6 @@ public class TcsOnSpot {
 
         }
         System.out.println(val*pArr[pArr.length-1]);
-
     }
     public static boolean isPrime(int n){
         for (int i = 2; i <n ; i++) {

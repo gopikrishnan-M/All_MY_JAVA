@@ -1,6 +1,6 @@
 package Leetry;
 
-class Solution {
+class Jumping {
     public static void main(String[] args) {
         System.out.println(canReach("011010",2,3));
     }
