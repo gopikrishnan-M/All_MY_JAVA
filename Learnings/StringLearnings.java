@@ -5,8 +5,13 @@ import java.util.List;
 
 public class StringLearnings {
     public static void main(String[] args) {
-        char c=0+'a';
-        System.out.println(c);
+        int a=5;
+        StringBuilder sb=new StringBuilder();
+        sb.append(a);
+        sb.append(3);
+        System.out.println(sb);
+//        char c=0+'a';
+//        System.out.println(c);
 
 
 //        String word="you";

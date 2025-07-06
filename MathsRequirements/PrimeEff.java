@@ -13,7 +13,7 @@ public class PrimeEff {
         if(i<=1){
             return false;
         }
-        while(c*c<i){
+        while(c*c<=i){
             if(i%c==0){
                 return false;
             }
