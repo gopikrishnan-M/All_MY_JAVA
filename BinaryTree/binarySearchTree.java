@@ -269,14 +269,4 @@ public class binarySearchTree {
         System.out.print(node.value+",");
     }
 }
-/*
-* 💡 Optional Enhancements
-A. Add a delete(int value) method
-If you’re aiming for full AVL functionality, consider implementing deletion with rebalancing.
-
-B. Add a contains(int value) method
-To quickly check if a value exists in the tree — useful for testing and usability.
-
-C. Consider toString() or array conversion
-For serialization or comparisons, you might return the tree as an in-order list or string
-* */
+// planning to create methods for deletion with reabalancing and dot contains menthod
