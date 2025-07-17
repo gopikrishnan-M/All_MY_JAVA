@@ -3,10 +3,10 @@ package BinaryTree;
 public class Main {
     public static void main(String[] args) {
         binarySearchTree tree=new binarySearchTree();
-        for (int i = 0; i <=21; i++) {
-            tree.insert(i);
-        }
-        tree.show();
+        int[] arr={10,7,12,5,9,11,13};
+        tree.populate(arr);
         tree.prettyPrint();
+        tree.BFS();
+        tree.BFSAverage();
     }
 }

@@ -30,7 +30,7 @@ public class CustomQueue {
 
     }
 
-    public int rempve() throws Exception{
+    public int romove() throws Exception{
         if(isEmpty())
             throw new Exception("queqe is empty");
         else{

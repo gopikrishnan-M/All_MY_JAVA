@@ -1,6 +1,6 @@
 package BinaryTree;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class binarySearchTree {
     //constructor
@@ -39,6 +39,19 @@ public class binarySearchTree {
     // Get height of a node
     private int height(Node node) {
         return node == null ? 0 : node.height;
+    }
+
+    //finds the maximum height of tree
+    //this is only created for bfslevelAdder 😅
+    public int maxHeight(){
+        return maxHeight(this.root,0);
+    }
+    private int maxHeight(Node node,int max){
+        if(node==null) return max;
+        max=Math.max(max, node.height);
+        maxHeight(node.left,max);
+        maxHeight(node.right,max);
+        return max;
     }
 
     //says weather the tree is empty or not
@@ -268,5 +281,99 @@ public class binarySearchTree {
         postOrder(node.right);
         System.out.print(node.value+",");
     }
+
+    //***********************************************************************//
+    //**************Tree questions kunal ************************************//
+
+    //BFS SUM OF EACH LEVEL - just giving it a try this may not be the good approach
+    public void myBfsAdder(){
+        int max=maxHeight();
+        int[] arr=new int[max];
+        myBfsAdder(arr,this.root,0);
+        for(int i=0;i<arr.length;i++){
+            System.out.println("sum of level "+ i + " is " + arr[i]);
+        }
+    }
+    private void myBfsAdder(int[] arr,Node node,int ht){
+        if (node == null) {
+            return;
+        }
+        arr[ht]+= node.value;
+        myBfsAdder(arr,node.left,ht+1);
+        myBfsAdder(arr,node.right,ht+1);
+    }
+
+//    public void BFStraversal(){
+//        Queue<Node> trav=new LinkedList<>();
+//        trav.add(this.root);
+//        this.BFStraversal(this.root,trav);
+//    }
+//    private void BFStraversal(Node node ,Queue<Node> traverse){
+//        if (node == null) {
+//            return;
+//        }
+//        System.out.println(traverse.remove().value);
+//        traverse.add(node.left);
+//        traverse.add(node.right);
+//
+//    }
+    public void BFS(){
+        for(List<Integer> level:BFS(this.root)){
+            System.out.println(level);
+        }
+    }
+    private List<List<Integer>> BFS(Node root){
+        List<List<Integer>> result=new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Queue<Node> queue=new LinkedList<>();
+        queue.offer(root);//similar to add but better than it returns false when given value is not added to the queue
+        while(!queue.isEmpty()){
+            int levelSize=queue.size();
+            List<Integer> currentLevel=new ArrayList<>();
+            for(int i=0;i<levelSize;i++){
+                Node cnode=queue.poll();
+                currentLevel.add(cnode.value);
+                if (cnode.left != null) {
+                    queue.offer(cnode.left);
+                }
+                if (cnode.right != null) {
+                    queue.offer(cnode.right);
+                }
+            }
+            result.add(currentLevel);
+        }
+            return result;
+    }
+
+    public void BFSAverage(){
+        System.out.println(BFSAverage(this.root));
+    }
+    private List<Integer> BFSAverage(Node root){
+        List<Integer> result=new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Queue<Node> queue=new LinkedList<>();
+        queue.offer(root);//similar to add but better than it returns false when given value is not added to the queue
+        while(!queue.isEmpty()){
+            int levelSize=queue.size();
+            int sum=0;
+            for(int i=0;i<levelSize;i++){
+                Node cnode=queue.poll();
+                sum+=cnode.value;
+                if (cnode.left != null) {
+                    queue.offer(cnode.left);
+                }
+                if (cnode.right != null) {
+                    queue.offer(cnode.right);
+                }
+            }
+            result.add(sum/levelSize);
+        }
+        return result;
+    }
+
 }
 // planning to create methods for deletion with reabalancing and dot contains menthod

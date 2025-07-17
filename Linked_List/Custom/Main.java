@@ -2,8 +2,14 @@ package Linked_List.Custom;
 
 public class Main {
     public static void main(String[] args) {
-
-
+    LinkdL a=new LinkdL();
+    a.insertFirst(1);
+    LinkdL b=new LinkdL();
+    b.insertFirst(1);
+    if(a==b){
+        System.out.println("we can do that");
+    }
+    else System.out.println("nah bro");
 
 //USING RECURSION
         /*LinkdL list=new LinkdL();

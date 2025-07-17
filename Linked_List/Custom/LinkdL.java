@@ -24,7 +24,6 @@ public class LinkdL {
             size++;
             return temp;
         }
-
         node.next=helper(val,index-1,node.next);
         return node;
 
