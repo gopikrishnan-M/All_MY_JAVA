@@ -317,6 +317,8 @@ public class binarySearchTree {
 //        traverse.add(node.right);
 //
 //    }
+
+    //simply does breath first search
     public void BFS(){
         for(List<Integer> level:BFS(this.root)){
             System.out.println(level);
@@ -347,6 +349,8 @@ public class binarySearchTree {
             return result;
     }
 
+
+    //calculates the average of the level and prints that value
     public void BFSAverage(){
         System.out.println(BFSAverage(this.root));
     }
@@ -374,6 +378,79 @@ public class binarySearchTree {
         }
         return result;
     }
+
+    //gives the level order successor for a give node i.e the element next to it in a given binary tree
+    public Node levelOrderSuccessor(Node root,Node node){
+        if (root == null) {
+            return node;
+        }
+        Queue<Node> queue=new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            Node cnode=queue.poll();
+            if (cnode.left != null) {
+                queue.offer(cnode.left);
+            }
+            if (cnode.right != null) {
+                queue.offer(cnode.right);
+            }
+            if (cnode.value == node.value) {
+                break;
+            }
+
+        }
+
+        return queue.peek();
+    }
+
+    //zig-zag traversal of tree Nailed it🔥 in mah first try 🥶🥶🥶
+    public List<List<Integer>> zigZag(){
+        return zigZag(this.root);
+    }
+    private List<List<Integer>> zigZag(Node root){
+        List<List<Integer>> result=new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Deque<Node> deque=new LinkedList<>();
+        deque.offer(root);
+        boolean forward=true;
+        while (!deque.isEmpty()) {
+            int levelSize=deque.size();
+            List<Integer> currentLevel=new ArrayList<>();
+            if (forward) {
+                for(int i=0;i<levelSize;i++){
+                    Node cnode=deque.removeFirst();
+                    currentLevel.add(cnode.value);
+                    if (cnode.left != null) {
+                        deque.addLast(cnode.left);
+                    }
+                    if (cnode.right != null) {
+                        deque.addLast(cnode.right);
+                    }
+                }
+                result.add(currentLevel);
+            }
+            else {
+                for (int i = 0; i < levelSize; i++) {
+                    Node cnode=deque.removeLast();
+                    currentLevel.add(cnode.value);
+                    if (cnode.right != null) {
+                        deque.addFirst(cnode.right);
+                    }
+                    if (cnode.left != null) {
+                        deque.addFirst(cnode.left);
+                    }
+                }
+                result.add(currentLevel);
+            }
+            forward=!forward;
+        }
+        return result;
+    }
+
+    // populating next right  pointer int the tree of its level
+    
 
 }
 // planning to create methods for deletion with reabalancing and dot contains menthod
