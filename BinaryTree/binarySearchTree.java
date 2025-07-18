@@ -449,8 +449,91 @@ public class binarySearchTree {
         return result;
     }
 
-    // populating next right  pointer int the tree of its level
-    
+    // in LEETCODE populating next right  pointer int the tree of its level
+    //.....
+
+
+    // right side view
+    public List<Integer> rightSideView(){
+        return rightSideView(this.root);
+    }
+    private List<Integer> rightSideView(Node root) {
+        List<Integer> ans=new ArrayList<>();
+        if(root==null){
+            return ans;
+        }
+        Queue<Node> queue=new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int levelSize=queue.size();
+            for(int i=0;i<levelSize;i++){
+                Node cnode=queue.poll();
+                if(cnode.left!=null){
+                    queue.offer(cnode.left);
+                }
+                if(cnode.right!=null){
+                    queue.offer(cnode.right);
+                }
+                if(i==levelSize-1){
+                    ans.add(cnode.value);
+                }
+            }
+        }
+        return ans;
+    }
+
+
+    //given values are cousins  or not
+
+    public boolean areCousins(int x,int y){
+        return areCousins(this.root,x,y);
+    }
+    private boolean areCousins(Node root,int x,int y){
+        Node xx=findNode(root,x);
+        Node yy=findNode(root,y);
+
+        return level(root,xx,0)==level(root,yy,0) && (!isSibling(root,xx,yy));
+    }
+    private Node findNode(Node node,int target){
+        if (node == null) {
+            return null;
+        }
+        if(node.value==target){
+            return node;
+        }
+        Node n=findNode(node.left,target);
+        if (n != null) {
+            return n;
+        }
+        return findNode(node.right,target);
+    }
+
+    private boolean isSibling(Node node,Node x,Node y){
+        if (node == null) {
+            return false;
+        }
+        return (
+                (node.left==x && node.right==y)
+                ||(node.left==y && node.right==x)
+                || isSibling(node.left,x,y)
+                || isSibling(node.right,x,y)
+                );
+    }
+
+    private int level(Node node,Node x,int lev){
+        if (node == null) {
+            return 0;
+        }
+        if (node == x) {
+            return lev;
+        }
+        int l=level(node.left,x,lev+1);
+        if (l != 0) {
+            return l;
+        }
+        return level(node.right,x,lev+1);
+
+    }
 
 }
 // planning to create methods for deletion with reabalancing and dot contains menthod
