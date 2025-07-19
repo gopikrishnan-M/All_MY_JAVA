@@ -5,11 +5,10 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         binarySearchTree tree=new binarySearchTree();
-        int[] arr={10,7,12,5,9,11,13};
+        int[] arr={1,2,3,4,5,6,7};
         tree.populate(arr);
         tree.prettyPrint();
-        for(List<Integer> level:tree.zigZag()){
-            System.out.println(level);
-        }
+        int value=tree.kthSmallest(5);
+        System.out.println(value+" thats it");
     }
 }

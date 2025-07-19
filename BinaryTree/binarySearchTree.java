@@ -86,6 +86,17 @@ public class binarySearchTree {
 
     }
 
+    //contains method for tree
+    public boolean contains(int num){
+        return contains(this.root,num);
+    }
+    private boolean contains(Node node,int target){
+        if (node == null) {
+            return false;
+        }
+        return node.value==target||contains(node.left,target)||contains(node.right,target);
+    }
+
     //insert array of elemets
     public void populate(int[] arr){
         for(int n:arr){
@@ -535,5 +546,336 @@ public class binarySearchTree {
 
     }
 
+    //Symmetric tree or not
+    public boolean isSymmetric(){
+        return isSymmetric(this.root);
+    }
+
+    private boolean isSymmetric(Node root) {
+        if (root == null) {
+            return false;
+        }
+        Queue<Node> queue=new LinkedList<>();
+        queue.offer(root.left);
+        queue.offer(root.right);
+        while (!queue.isEmpty()) {
+            Node left=queue.poll();
+            Node right=queue.poll();
+            if (left == null && right == null) {
+                continue;
+            }
+            if (left == null || right == null) {
+                return false;
+            }
+            if (left.value != right.value) {
+                return false;
+            }
+            queue.offer(left.left);
+            queue.offer(right.right);
+            queue.offer(left.right);
+            queue.offer(right.left);
+        }
+        return true;
+    }
+
+    //********************************************************************************
+    //***********************DEPTH FIRST SEARCH **************************************
+    //********************************************************************************
+    //  #dfs has basically types of traversal they are preorder,post order ,in order
+
+
+    //below one we will solve using inorder
+    private int longest;
+    public int maxDiameter(){
+        return maxDiameter(this.root);
+    }
+    private int maxDiameter(Node root) {
+        depth(root);
+        return longest;
+    }
+    private int depth(Node node){
+        if (node == null) {
+            return 0;
+        }
+        int left=depth(node.left);
+        int right=depth(node.right);
+
+        longest=Math.max(longest,left+right);
+        return Math.max(left,right)+1;
+    }
+
+
+    //invert a binary tree
+    public Node invert(){
+        return invert(this.root);
+    }
+    private Node invert(Node node){
+        if (node == null) {
+            return null;
+        }
+        Node left=invert(node.left);
+        Node right=invert(node.right);
+        node.left=right;
+        node.right=left;
+        return node;
+    }
+
+
+    //maximum height length of path from root to any leaf
+    public int maximumHeight(){
+        return maximumHeight(this.root);
+    }
+
+    private int maximumHeight(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        int left=maximumHeight(node.left);
+        int right=maximumHeight(node.right);
+        return Math.max(left,right)+1;
+    }
+
+    //FLATTEN BINARY TREE i.e into a linked list
+    //this is a easy wey to understand but does not meet the requirements check flattenEff
+    public void flatten(){
+        flatten(this.root);
+    }
+    private void flatten(Node root) {
+        Queue<Node> queue=new LinkedList<>();
+        helper(queue,root);
+        Node node=queue.poll();
+        while(!queue.isEmpty()){
+            node.right=queue.poll();
+            node.left=null;
+            node=node.right;
+        }
+    }
+    private void helper(Queue<Node> queue,Node node){
+        if(node==null){
+            return;
+        }
+        queue.offer(node);
+        helper(queue,node.left);
+        helper(queue,node.right);
+    }
+
+    //flatten efficient
+    public void flattenEff(){
+        flattenEff(this.root);
+    }
+    private void flattenEff(Node root){
+        if (root == null) {
+            return;
+        }
+        Node current=root;
+        while (current != null) {
+            Node temp=current.left;
+            if (temp != null) {
+                while (temp.right != null) {
+                    temp=temp.right;
+                }
+                temp.right=current.right;
+                current.right=current.left;
+                current.left=null;
+            }
+            current=current.right;
+        }
+    }
+
+    // check the tree is valid BST or not
+    public boolean isValidBST(){
+        return isValidBST(this.root,null,null);
+    }
+
+    private boolean isValidBST(Node node,Integer low,Integer high) {
+        if (node == null) {
+            return true;
+        }
+        if (low != null && node.value <= low) {
+            return false;
+        }
+        if (high != null && node.value >= high) {
+            return false;
+        }
+        boolean left=isValidBST(node.left,low,node.value);
+        boolean right=isValidBST(node.right,node.value,high);
+
+        return left && right;
+    }
+
+    //lowest common ansister this means two nodes should have a common ansister ,of course root will be ansister but we
+    //should find a node which is as lower as possible close to those two nodes given and also they should be the ansister
+    public Node lowestCommonAnsister(Node x,Node y){
+        return lowestCommonAnsister(this.root,x,y);
+    }
+
+    private Node lowestCommonAnsister(Node node,Node x,Node y) {
+        if (node == null) {
+            return null;
+        }
+        if (node == x || node == y) {
+            return node;
+        }
+        Node left=lowestCommonAnsister(node.left,x,y);
+        Node right=lowestCommonAnsister(node.right,x,y);
+        if (left != null && right != null) {
+            return node;
+        }
+        return left==null?right:left;
+    }
+
+    // find the kth smalllest element in a binary search tree
+    //can easily be done with inorder traversal of tree and add it in the list finally get the kth element from the list
+    // lets see the efficient one
+    private int count=0;
+    public int kthSmallest(int k){
+        return kthSmallest(this.root,k).value;
+    }
+
+    private Node kthSmallest(Node node, int k) {
+        if (node == null) {
+            return null;
+        }
+        Node left=kthSmallest(node.left,k);
+        if (left != null) {
+            return left;
+        }
+        count++;
+        if (count == k) {
+            return node;
+        }
+        return kthSmallest(node.right,k);
+
+    }
+
+    //BINARY TREE SERIALIZE AND DE SERIALIZE ***** VERY *****VERY *********IMPORTANT*********
+    public List<String> serialize(){
+        List<String> list=new ArrayList<>();
+        serialize(this.root,list);
+        return list;
+    }
+    private void serialize(Node node, List<String> list) {
+        if (node == null) {
+            list.add("null");
+        }
+        list.add(String.valueOf(node.value));
+        serialize(node.left,list);
+        serialize(node.right,list);
+    }
+    public Node deserialize(List<String> list){
+        Collections.reverse(list);
+        return deserializer(list);
+    }
+    private Node deserializer(List<String> list) {
+        String val=list.remove(list.size()-1);
+        if (val.charAt(0) == 'n') {
+            return null;
+        }
+        Node node=new Node(Integer.parseInt(val));
+        node.left=deserializer(list);
+        node.right=deserializer(list);
+        return node;
+    }
+    //try to make this list into a string and add comas and split it to make it as a tree(LEETCODE PROBLEM SERIALIZE AND DESERIALIZE)
+
+    //************ PATH SUM QUESTIONS ****************
+    public boolean hasPathsum(int target){
+        return hasPathsum(this.root,target);
+    }
+    private boolean hasPathsum(Node node, int target) {
+        if (node == null) {
+            return false;
+        }
+        if (node.value == target && node.left == null && node.right == null) {
+            return true;
+        }
+        return hasPathsum(node.left,target-node.value) || hasPathsum(node.right,target-node.value);
+    }
+
+//take digits from root to leaves and sum all the values and return
+    public int sumOfRootToLeaves(){
+        return sumOfRootToLeaves(this.root,0);
+    }
+    private int sumOfRootToLeaves(Node node,int sum){
+        if (node == null) {
+            return 0;
+        }
+        sum=sum*10+node.value;
+        if (node.left == null && node.right == null) {
+            return sum;
+        }
+        int left=sumOfRootToLeaves(node.left,sum);
+        int right=sumOfRootToLeaves(node.right,sum);
+        return left+right;
+    }
+
+    //HARD PROBLEM RETURN THE MAXIMUM SUM PATH (the path not necessarily contain root)
+    private int answer=Integer.MIN_VALUE;
+    public int maximumSumPath(){
+        maximumSumPath(this.root);
+        return answer;
+    }
+
+    private int maximumSumPath(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        int left=maximumSumPath(node.left);
+        int right=maximumSumPath(node.right);
+
+        left=Math.max(0,left);
+        right=Math.max(0,right);
+
+        int pathsum= left+right+node.value;
+        answer=Math.max(answer,pathsum);
+        return Math.max(left,right)+node.value;
+    }
+
+    //find path exist in the tree or not question by kunal
+    public boolean findPath(int[] arr){
+        return findPath(this.root,arr,0);
+    }
+
+    private boolean findPath(Node node, int[] arr,int position) {
+        if (node == null) {
+            return false;
+        }
+        if (position>=arr.length || arr[position] != node.value) {
+            return false;
+        }
+        if (node.left == null && node.right == null && position == arr.length - 1) {
+            return true;
+        }
+        return findPath(node.left,arr,position+1) ||findPath(node.right,arr,position+1);
+    }
+
+    //return the total number of paths that exists for the given totalvalue
+    //this is clearly a savage i dint even solve it i just simply typed this from kunal and just trying ot understand
+    public int numberOfPathSum(int val){
+        List<Integer> path=new ArrayList<>();
+        return numberOfPathSum(this.root,val,path);
+    }
+
+    private int numberOfPathSum(Node node, int sum, List<Integer> path) {
+        if (node == null) {
+            return 0;
+        }
+        path.add(node.value);
+        int count=0;
+        int s=0;
+        // how many paths can be made from current obtained path
+        ListIterator<Integer> iterator=path.listIterator(path.size());
+        while(iterator.hasPrevious()){
+            s+= iterator.previous();
+            if (s == sum) {
+                count++;
+            }
+        }
+        count+=numberOfPathSum(node.left,s,path)+numberOfPathSum(node.right,s,path);
+        //backtrack
+        path.remove(path.size()-1);
+        return count;
+
+    }
 }
-// planning to create methods for deletion with reabalancing and dot contains menthod
+// planning to create methods for deletion with reabalancing
