@@ -850,7 +850,7 @@ public class binarySearchTree {
     }
 
     //return the total number of paths that exists for the given totalvalue
-    //this is clearly a savage i dint even solve it i just simply typed this from kunal and just trying ot understand
+    //this is clearly a savage i didn't even solve it i just simply typed this from kunal and just trying ot understand
     public int numberOfPathSum(int val){
         List<Integer> path=new ArrayList<>();
         return numberOfPathSum(this.root,val,path);
@@ -877,5 +877,38 @@ public class binarySearchTree {
         return count;
 
     }
+    //let's print and see the below function
+    public void preInPrint(int[] preOrder,int[] inOrder){
+        Node root=preIn(preOrder,inOrder);
+        prettyPrint(root,0);
+    }
+
+    //building tree using array of integers of preorder and inorder
+    private int index=0;// this is the global index value of preorder traversing array we can even pass this as argument
+    private Node preIn(int[] preOrder,int[] inOrder){
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for (int i = 0; i < inOrder.length; i++) {
+            map.put(inOrder[i],i);//mapping the value to its index 🤯 so, when we ask for index it will return
+            //the index without even thinking i.e O(1) time complexity
+        }
+            return preIn(inOrder,preOrder,0,inOrder.length-1,map);
+    }
+    private Node preIn(int[] inOrder, int[] preOrder, int left, int right, HashMap<Integer, Integer> map) {
+        if (left > right) {//the left and right pointers help in traversal of inorder array but without even traversing
+            return null;
+        }
+        int current=preOrder[index++]; //get the integer value of current int in preorder
+        Node node=new Node(current);//with tat value make a node
+        if (left == right) {
+            return node;
+        }
+        int mapIndex=map.get(current);//this is the inorder index which improves eff by hash map
+        //in constant time  rather than completely traversing the array
+        node.left=preIn(inOrder,preOrder,left,mapIndex-1,map);
+        node.right=preIn(inOrder,preOrder,mapIndex+1,right,map);
+        return node;
+
+    }
+
 }
 // planning to create methods for deletion with reabalancing
