@@ -726,12 +726,37 @@ public class binarySearchTree {
 
     // find the kth smalllest element in a binary search tree
     //can easily be done with inorder traversal of tree and add it in the list finally get the kth element from the list
+    public int kthSmallestBrute(int k){
+        return kthSmallestBrute(this.root,k);
+    }
+
+    private int kthSmallestBrute(Node root, int k) {
+        PriorityQueue<Integer> minHeap=new PriorityQueue<>();
+        kthSmallestBrute(root,k,minHeap);
+        //remove k elements
+        int ans=0;
+        for (int i = 0; i < k; i++) {
+            ans=minHeap.poll();
+        }
+        return ans;
+    }
+
+    private void kthSmallestBrute(Node node, int k, PriorityQueue<Integer> minHeap) {
+        if (node == null) {
+            return;
+        }
+        kthSmallestBrute(node.left,k,minHeap);
+
+        minHeap.offer(node.value);
+
+        kthSmallestBrute(node.right,k,minHeap);
+    }
+
     // lets see the efficient one
     private int count=0;
     public int kthSmallest(int k){
         return kthSmallest(this.root,k).value;
     }
-
     private Node kthSmallest(Node node, int k) {
         if (node == null) {
             return null;
@@ -909,6 +934,120 @@ public class binarySearchTree {
         return node;
 
     }
+    //vertical order traversal of tree
+    //here we can use hash map also but ,it won't store it in sorted order so, we will maintain a minimum
+    //and a maximum value and use  loop to traverse from min to max and get the nodes in it
+    //as we move left and right we will -1 and +1 respectively
+    //there instead of using a "Map.Entry<Node,Integer>" we can simply use a class specific for that
+    /*
+     class pair{
+      Node node;
+      int col;
+
+       private pair(Node node,int col){
+            this.node=node;
+            this.col=col;
+       }
+      }
+     */
+    public List<List<Integer>> verticalTraversal(){
+        return verticalTraversal(this.root);
+    }
+
+    private List<List<Integer>> verticalTraversal(Node node) {
+        List<List<Integer>> ans=new ArrayList<>();
+        if(node==null){
+            return ans;
+        }
+        int col=0;
+
+        Queue<Map.Entry<Node,Integer>> queue=new ArrayDeque<>();
+        Map<Integer,ArrayList<Integer>> indexToList =new HashMap<>();
+
+        queue.offer(new AbstractMap.SimpleEntry<>(node,col));
+
+        int min=0;
+        int max=0;
+
+        while (!queue.isEmpty()) {
+            Map.Entry<Node,Integer> removed=queue.poll();
+            node=removed.getKey();
+            col=removed.getValue();
+
+            if (node != null) {
+                if (!indexToList.containsKey(col)) {
+                    indexToList.put(col,new ArrayList<Integer>());
+                }
+                indexToList.get(col).add(node.value);
+
+                min=Math.min(min,col);
+                max=Math.max(max,col);
+
+                queue.offer(new AbstractMap.SimpleEntry<>(node.left,col-1));
+                queue.offer(new AbstractMap.SimpleEntry<>(node.right,col+1));
+            }
+        }
+
+        for (int i = min; i <=max; i++) {
+            ans.add(indexToList.get(i));
+        }
+        return ans;
+    }
+
+    //WORD LADDER LEETCODE
+    public int ladderLenght(String start,String end,List<String> words){
+        if(!words.contains(end)){
+            return 0;
+        }
+        Set<String> visited=new HashSet<>();
+        Queue<String> queue=new LinkedList<>();
+
+        queue.offer(start);
+        int lenght=0;
+        while (!queue.isEmpty()) {
+            int size= queue.size();
+            lenght++;
+
+            for(int i=0;i< size;i++){
+                String current= queue.poll();
+
+                for(int j=0; j<current.length();j++){
+                    char[] temp=current.toCharArray();
+                    for(char ch='a'; ch<='z';ch++){
+                        temp[j]=ch;
+                        String nWord=new String(temp);
+                        if(nWord.equals(end)){
+                            return lenght+1;
+                        }
+                        if(words.contains(nWord) && !visited.contains(nWord)){
+                            queue.offer(nWord);
+                            visited.add(nWord);
+                        }
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    //TWO-IV
+    public boolean twoSum(Node root,int k){
+        HashSet<Integer> set=new HashSet<>();
+        return twoSum(root,k,set);
+    }
+
+    private boolean twoSum(Node node, int k, HashSet<Integer> set) {
+        if (node == null) {
+            return false;
+        }
+        if (set.contains(k - node.value)) {
+            return true;
+        }
+        set.add(node.value);
+        return twoSum(node.left,k,set) || twoSum(node.right,k,set);
+    }
+    
+    
 
 }
 // planning to create methods for deletion with reabalancing
