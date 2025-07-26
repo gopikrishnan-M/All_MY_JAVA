@@ -704,7 +704,7 @@ public class binarySearchTree {
     }
 
     //lowest common ansister this means two nodes should have a common ansister ,of course root will be ansister but we
-    //should find a node which is as lower as possible close to those two nodes given and also they should be the ansister
+    //should find a node which is as lower as possible close to those two given nodes and also they should be the ansister
     public Node lowestCommonAnsister(Node x,Node y){
         return lowestCommonAnsister(this.root,x,y);
     }
@@ -1045,6 +1045,27 @@ public class binarySearchTree {
         }
         set.add(node.value);
         return twoSum(node.left,k,set) || twoSum(node.right,k,set);
+    }
+
+    // two nodes swapped in a bst
+    Node first;
+    Node second;
+    Node prev;
+    public void twoNodesSwapped(Node node){
+        if (node == null) {
+            return ;
+        }
+        twoNodesSwapped(node.left);
+
+        if (prev != null && prev.value > node.value) {
+            if (first == null) {
+                first =prev;
+            }
+            second=node;
+        }
+        prev=node;
+
+        twoNodesSwapped(node.right);
     }
     
     
