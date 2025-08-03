@@ -2,8 +2,8 @@ package MathsRequirements;
 
 public class Powerbits {
     public static void main(String[] args) {
-        int a=3;
-        int powe =3;
+        int a=2;
+        int powe =5;
         int ans=1;
         int base=a;
         while(powe >0){

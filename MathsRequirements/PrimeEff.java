@@ -2,7 +2,8 @@ package MathsRequirements;
 
 public class PrimeEff {
     public static void main(String[] args) {
-        int n=20;
+        int n=29;
+        System.out.println(isPrime(n));
         for (int i = 0; i < n; i++) {
             System.out.println(i+" "+isPrime(i));
         }

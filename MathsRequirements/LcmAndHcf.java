@@ -2,8 +2,8 @@ package MathsRequirements;
 
 public class LcmAndHcf {
     public static void main(String[] args) {
-        System.out.println(lcm(2,7));//smallest number that is divisible by both a,b
-        System.out.println(hcf(2,7));//largest number that divides both a,b
+        System.out.println(hcf(15,7));//largest number that divides both a,b
+        System.out.println(lcm(15,7));//smallest number that is divisible by both a,b
     }
 
     private static int lcm(int a, int b) {

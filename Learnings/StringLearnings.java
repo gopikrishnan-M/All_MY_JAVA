@@ -2,15 +2,21 @@ package Learnings;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class StringLearnings {
     public static void main(String[] args) {
-        int a=5;
-        StringBuilder sb=new StringBuilder();
-        sb.append(a);
-        sb.append(3);
-        System.out.println(sb);
-//        char c=0+'a';
+        String input="-1,-2,-3,-4";
+        String[] arr=input.split(",");
+        int a=Integer.valueOf(arr[0]);
+        System.out.println(a);
+//        int a=5;
+//        StringBuilder sb=new StringBuilder();
+//        sb.append(a);
+//        sb.append(3);
+//        System.out.println(sb);
+//        Scanner sc=new Scanner(System.in);
+////        char c=0+'a';
 //        System.out.println(c);
 
 

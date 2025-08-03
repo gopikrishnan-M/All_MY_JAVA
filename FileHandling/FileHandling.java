@@ -16,6 +16,7 @@ by reading it returns an integer but not character that is why we have written i
 public class FileHandling {
     public static void main(String[] args) {
         completeFile();
+
     }
     public static void completeFile(){
         //creating a file

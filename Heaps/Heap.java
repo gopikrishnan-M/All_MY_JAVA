@@ -85,4 +85,8 @@ public class Heap<T extends Comparable<T>> {
     //nodes after n/2+1 are leaf nodes so we don't consider them.
     //now from n/2 to 1 check every node weather they are in correct position or not
     //by calling downheap method
+
+    public int size(){
+        return list.size();
+    }
 }
