@@ -732,7 +732,7 @@ public class binarySearchTree {
 
     private int kthSmallestBrute(Node root, int k) {
         PriorityQueue<Integer> minHeap=new PriorityQueue<>();
-        kthSmallestBrute(root,k,minHeap);
+        kthSmallestBrute(root,minHeap);
         //remove k elements
         int ans=0;
         for (int i = 0; i < k; i++) {
@@ -741,15 +741,15 @@ public class binarySearchTree {
         return ans;
     }
 
-    private void kthSmallestBrute(Node node, int k, PriorityQueue<Integer> minHeap) {
+    private void kthSmallestBrute(Node node, PriorityQueue<Integer> minHeap) {
         if (node == null) {
             return;
         }
-        kthSmallestBrute(node.left,k,minHeap);
+        kthSmallestBrute(node.left,minHeap);
 
         minHeap.offer(node.value);
 
-        kthSmallestBrute(node.right,k,minHeap);
+        kthSmallestBrute(node.right,minHeap);
     }
 
     // lets see the efficient one
@@ -788,7 +788,8 @@ public class binarySearchTree {
         serialize(node.right,list);
     }
     public Node deserialize(List<String> list){
-        Collections.reverse(list);
+        Collections.reverse(list);//reversing save time and reduce complexity coz
+        //after every remove every element should be moved front but if we reverse and remove then no issue
         return deserializer(list);
     }
     private Node deserializer(List<String> list) {
@@ -801,7 +802,7 @@ public class binarySearchTree {
         node.right=deserializer(list);
         return node;
     }
-    //try to make this list into a string and add comas and split it to make it as a tree(LEETCODE PROBLEM SERIALIZE AND DESERIALIZE)
+
 
     //************ PATH SUM QUESTIONS ****************
     public boolean hasPathsum(int target){

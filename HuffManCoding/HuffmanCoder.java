@@ -45,12 +45,10 @@ public class HuffmanCoder {
 
         Heap<Node> minheap=new Heap<>();
         Set<Map.Entry<Character,Integer>> entryset=fmap.entrySet();
-        int size=0;
 
         for(Map.Entry<Character,Integer> entry:entryset){
             Node node=new Node(entry.getKey(),entry.getValue());
             minheap.insert(node);
-            size++;
         }
 
         while (minheap.size()!=1) {
@@ -68,6 +66,7 @@ public class HuffmanCoder {
 
         this.encoder=new HashMap<>();
         this.decoder=new HashMap<>();
+        initEncoderDecoder(fulltree,"");
 
     }
     private void initEncoderDecoder(Node node ,String opSoFar){

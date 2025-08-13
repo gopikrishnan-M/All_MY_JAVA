@@ -1,10 +1,11 @@
 package HuffManCoding;
 
 public class Main {
-    public static void main(String[] args) {
-        String msg="hello";
+    public static void main(String[] args) throws Exception {
+        String msg="how";
         //object creation
         HuffmanCoder hc=new HuffmanCoder();
+        hc.encoder(msg);
 
         //coding the string using huffman code wiht the help of tree
         String codedString= hc.encode(msg);

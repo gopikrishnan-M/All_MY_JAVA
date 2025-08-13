@@ -6,10 +6,13 @@ import java.util.Scanner;
 
 public class StringLearnings {
     public static void main(String[] args) {
-        String input="-1,-2,-3,-4";
-        String[] arr=input.split(",");
-        int a=Integer.valueOf(arr[0]);
-        System.out.println(a);
+        char[] arr={'g','0'};
+        String tryn=new String(arr);
+        System.out.println(tryn);
+//        String input="-1,-2,-3,-4";
+//        String[] arr=input.split(",");
+//        int a=Integer.valueOf(arr[0]);
+//        System.out.println(a);
 //        int a=5;
 //        StringBuilder sb=new StringBuilder();
 //        sb.append(a);
